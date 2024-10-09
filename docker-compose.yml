@@ -1,0 +1,58 @@
+services:
+  express:
+    build:
+      context: ./server
+    container_name: express-container
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./server:/usr/src/app
+      - /usr/src/app/node_modules
+      - ./productImages:/usr/src/app/productImages # Volumen para las imágenes de los productos
+    depends_on:
+      mysql:
+        condition: service_healthy
+
+  frontend:
+    build:
+      context: ./frontend
+    container_name: react-container
+    ports:
+      - "5173:5173"
+    volumes:
+      - ./frontend:/usr/src/app
+      - /usr/src/app/node_modules
+      - ./productImages:/usr/src/app/public/productImages # Volumen para las imágenes de los productos
+    depends_on:
+      - express
+      - mysql
+
+  mysql:
+    image: mysql:9
+    container_name: mysql-container
+    environment:
+      - MYSQL_ROOT_PASSWORD=test
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql-data:/var/lib/mysql
+    restart: always
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 5s
+      timeout: 3s
+      retries: 5
+
+  phpmyadmin:
+    image: phpmyadmin:5-apache
+    container_name: phpmyadmin-container
+    environment:
+      - PMA_HOST=mysql-container
+      - PMA_PORT=3306
+    ports:
+      - "8080:80"
+    depends_on:
+      - mysql
+
+volumes:
+  mysql-data:

@@ -1,0 +1,46 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+    main, nav {
+        @apply container mx-auto
+    }
+
+    main {
+        @apply grow my-2
+    }
+
+    .nav__link {
+        @apply rounded-full p-3 hover:cursor-pointer transition
+            bg-yellow-800 hover:bg-yellow-700
+            dark:bg-blue-900 dark:hover:bg-blue-700
+    }
+
+    .btn-primary {
+        @apply block h-10 transition p-2 text-center font-medium rounded-full 
+             text-white bg-yellow-900 hover:bg-yellow-800 dark:bg-blue-950 
+             dark:hover:bg-blue-900 disabled:bg-yellow-900/50 disabled:text-white/50
+             dark:disabled:bg-blue-900/50
+    }
+
+    .btn-secondary {
+        @apply block h-10 transition p-2 text-center font-medium rounded-full
+             text-white bg-gray-700 hover:bg-gray-600
+    }
+
+    .btn-danger {
+        @apply block h-10 transition p-2 text-center font-medium rounded-full
+             text-white bg-red-800 hover:bg-red-700
+    }
+
+    /* FORMULARIO */
+    input, textarea {
+        @apply grow px-3 pt-6 p-2 placeholder-transparent rounded-2xl
+               font-medium outline-none bg-orange-200
+               focus:outline-2 focus:outline-yellow-800
+               focus:ring-4 focus:ring-yellow-900
+               dark:bg-slate-300 dark:text-black dark:focus:outline-blue-800
+               dark:focus:ring-blue-900
+    }
+}
