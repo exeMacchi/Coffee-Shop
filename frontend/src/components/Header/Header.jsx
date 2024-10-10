@@ -12,7 +12,7 @@ import { PrivateRoutes, PublicRoutes } from "../../utilities/routes";
 
 export default function Header({ isHomePage, isAdminPage }) {
     const [darkMode, setDarkMode] = useState(undefined);
-    const { isAdminLogged, setAdminLogged } = useAuthContext();
+    const { isAdminLogged, setIsAdminLogged } = useAuthContext();
     const navigate = useNavigate();
 
     /* Modo oscuro */
@@ -27,7 +27,7 @@ export default function Header({ isHomePage, isAdminPage }) {
     const handleLogout = async () => {
         const res = await logout();
         if (res.status === 200) {
-            setAdminLogged(false);
+            setIsAdminLogged(false);
             navigate(PublicRoutes.HomePage);
         }
         else {

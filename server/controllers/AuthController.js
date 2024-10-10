@@ -59,14 +59,13 @@ const login = async (req, res) => {
                 }
             );
 
-            res.cookie("JWT", token, {
+            res.cookie("jwt", token, {
                 httpOnly: true,
                 maxAge: 3600000, // 1 h
-                sameSite: "strict"
             });
 
             return res.status(200).json({ 
-                message: "Inicio de sesión correcta",
+                message: `Inicio de sesión correcta`,
                 isAdmin: user.admin,
             });
         }
@@ -82,7 +81,7 @@ const login = async (req, res) => {
 /* --- LOGOUT --- */
 const logout = async (req, res) => {
     try {
-        res.clearCookie("JWT");
+        res.clearCookie("jwt");
         return res.status(200).json({ message:"Cierre de sesión exitoso" });
     }
     catch (err) {

@@ -3,8 +3,7 @@ import { config } from "dotenv";
 config();
 
 const adminRequired = (req, res, next) => {
-    //const token = req.header("authorization");
-    const token = res.cookies["JWT"];
+    const token = req.cookies["jwt"];
 
     if (!token) {
         return res.status(401).json({ 

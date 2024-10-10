@@ -40,9 +40,9 @@ const createProduct = async (req, res) => {
         }
 
         const newProduct = await ProductModel.create({
-            name: req.body.productName,
-            description: req.body.productDescription,
-            price: req.body.productPrice,
+            name: req.body.name,
+            description: req.body.name,
+            price: req.body.price,
             image: productImage
         });
 
@@ -81,9 +81,9 @@ const editProduct = async (req, res) => {
 
         /* --- Actualizar el producto --- */
         await ProductModel.update({
-            name: req.body.productName,
-            description: req.body.productDescription,
-            price: req.body.productPrice,
+            name: req.body.name,
+            description: req.body.description,
+            price: req.body.price,
             image: productImage
         }, {
             where: { id: req.params.id }

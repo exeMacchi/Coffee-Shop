@@ -2,15 +2,15 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuthContext } from "../providers/AuthProvider.jsx";
 
+import { PrivateRoutes, PublicRoutes } from "../utilities/routes.js";
 import { register, login } from "../services/authService.js";
 
 import Header from "../components/Header/Header";
 import Footer from "../components/Footer/Footer";
-import FormInput from "../components/Form/FormInput";
-import { PrivateRoutes, PublicRoutes } from "../utilities/routes.js";
+import FloatingLabel from "../components/Form/FloatingLabel.jsx";
 
 export default function AuthPage({ isRegisterForm }) {
-    const { setAdminLogged } = useAuthContext();
+    const { setIsAdminLogged } = useAuthContext();
 
     /* --- FORM --- */
     const [auth, setAuth] = useState({
@@ -28,6 +28,16 @@ export default function AuthPage({ isRegisterForm }) {
         setBtnDisabled(!isFormValid);
     }, [auth]);
 
+    /* Cambia el valor de un input del formulario */
+    const handleInputChange = (e) => {
+        const { name, value } = e.target;
+        setAuth((prevInputsValues) => ({
+            ...prevInputsValues,
+            [name]: value
+        }));
+    }
+
+    /* En envía el formulario */
     const handleOnSubmit = async (e) => {
         e.preventDefault();
         const formData = new FormData(e.target);
@@ -49,7 +59,7 @@ export default function AuthPage({ isRegisterForm }) {
             const res = await login(formData);
             if (res.status === 200) {
                 console.log(res.data.message);
-                setAdminLogged(true);
+                setIsAdminLogged(true);
                 navigate(PrivateRoutes.AdminPage);
             }
             else {
@@ -69,21 +79,28 @@ export default function AuthPage({ isRegisterForm }) {
             <div className="grow flex flex-col justify-center">
                 <form className="flex flex-col justify-center gap-20 w-1/2 mx-auto"
                       onSubmit={handleOnSubmit}>
-                    <FormInput id={"username"}
-                               type={"text"}
-                               name={"username"}
-                               inputValue={auth.username}
-                               setInputValue={setAuth}
-                               labelText={"Usuario"}
-                               required/>
 
-                    <FormInput id={"password"}
-                               type={"password"}
-                               name={"password"}
-                               inputValue={auth.password}
-                               setInputValue={setAuth}
-                               labelText={"Contraseña"}
+                    <FloatingLabel inputID={"username"} labelText={"Usuario"}>
+                        <input id="username" 
+                               type="text" 
+                               className="peer h-14 placeholder-shown:pt-2"
+                               name="username"
+                               placeholder="Usuario"
+                               onChange={handleInputChange}
+                               value={auth.username}
                                required/>
+                    </FloatingLabel>
+
+                    <FloatingLabel inputID={"password"} labelText={"Contraseña"}>
+                        <input id="password"
+                               type="password" 
+                               name="password"
+                               value={auth.password}
+                               placeholder="Contraseña"
+                               onChange={handleInputChange}
+                               className="peer h-14 placeholder-shown:pt-2"
+                               required/>
+                    </FloatingLabel>
 
                     <div className="flex justify-between gap-2">
                     {

@@ -10,7 +10,7 @@ async function register( formData ) {
             {
                 headers: {
                     "Content-Type": "application/json"
-                }
+                },
             }
         );
 
@@ -31,7 +31,8 @@ async function login( formData ) {
             {
                 headers: {
                     "Content-Type": "application/json"
-                }
+                },
+                withCredentials: true
             }
         );
 
@@ -45,7 +46,9 @@ async function login( formData ) {
 /* --- LOGOUT --- */
 async function logout() {
     try {
-        const res = await axios.get(`${BASE_URL}/auth/logout`);
+        const res = await axios.get(`${BASE_URL}/auth/logout`, {
+            withCredentials: true
+        });
         return res;
     }
     catch (err) {

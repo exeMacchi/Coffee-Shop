@@ -59,7 +59,8 @@ async function createProduct( formData ) {
                     {
                         headers: {
                             "Content-Type": "multipart/form-data"
-                        }
+                        },
+                        withCredentials: true
                     });
         return res.status;
     }
@@ -73,14 +74,16 @@ async function createProduct( formData ) {
 async function editProduct( id, formData ) {
     try {
         const res = await axios.put(
-                            `${BASE_URL}/products/edit/${id}`, 
-                            formData,
-                            {
-                                headers: {
-                                    "Content-Type": "multipart/form-data"
-                                }
-                            });
-        return res.status;
+            `${BASE_URL}/products/edit/${id}`, 
+            formData,
+            {
+                headers: {
+                    "Content-Type": "multipart/form-data"
+                },
+                withCredentials: true
+            });
+        console.log(`res: ${res}`);
+        return res;
     }
     catch (err) {
         console.error(err);
@@ -92,7 +95,8 @@ async function editProduct( id, formData ) {
 async function deleteProduct( productID, productImage ) {
     try {
         const res = await axios.delete(`${BASE_URL}/products/delete/${productID}`, {
-            data: { productImage }
+            data: { productImage },
+            withCredentials: true
         });
         return res.status;
     }

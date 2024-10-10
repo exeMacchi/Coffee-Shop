@@ -5,17 +5,16 @@ import { getProduct, createProduct, editProduct } from "../services/productServi
 /* --- COMPONENTES --- */
 import Footer from "../components/Footer/Footer";
 import Header from "../components/Header/Header";
-import FormInput from "../components/Form/FormInput";
 import axios from "axios";
 import Spinner from "../components/Spinner/Spinner";
 import { PrivateRoutes } from "../utilities/routes";
+import FloatingLabel from "../components/Form/FloatingLabel";
 
 export default function CreateEditPage() {
     const [initialLoading, setInitialLoading] = useState(true);
     const [processLoading, setProcessLoading] = useState(false);
 
     const { id } = useParams();
-    const productImgForm = useRef();
     const navigate = useNavigate();
 
     /* --- FORM STATE --- */
@@ -25,6 +24,7 @@ export default function CreateEditPage() {
         price: 0,
         image: "/productImages/productPlaceholder.jpg"
     });
+    const productImgForm = useRef();
     const [btnDisabled, setBtnDisabled] = useState(true);
 
     /* --- INITIAL CONFIG --- */
@@ -49,9 +49,9 @@ export default function CreateEditPage() {
     /* --- FORM BTN --- */
     useEffect(() => {
         if (!initialLoading) {
-            const isFormValid = product.name.length > 0 && 
-                                product.description.length > 0 &&
-                                product.price > 0;
+            const isFormValid = product?.name?.length > 0 && 
+                                product?.description?.length > 0 &&
+                                product?.price > 0;
 
             setBtnDisabled(!isFormValid);
         }
@@ -69,20 +69,35 @@ export default function CreateEditPage() {
         }
     }
 
+    /* Cambia el valor de un input del formulario */
+    const handleInputChange = (e) => {
+        const { name, value } = e.target;
+        setProduct((prevInputsValues) => ({
+            ...prevInputsValues,
+            [name]: value
+        }));
+    }
+
     /* --- FORM SUBMIT --- */
     const handleOnSubmit = async (e) => {
         try {
             e.preventDefault();
             setProcessLoading(true);
             const formData = new FormData(e.target);
+            console.log(formData.get("name"));
+            console.log(formData.get("description"));
+            console.log(formData.get("price"));
+            console.log(formData.get("productImage"));
             /* --- Se edita un producto --- */
             if (id) {
-                const resStatus = await editProduct(id, formData);
+                const res = await editProduct(id, formData);
 
-                if (resStatus === 200) {
+                if (res.status === 200) {
+                    console.log(res.data.message);
                     navigate(PrivateRoutes.AdminPage);
                 }
                 else {
+                    console.error(res.data.message);
                     // TODO: ALERTA DE ERROR AL MODIFICAR PRODUCTO
                 }
             }
@@ -109,7 +124,7 @@ export default function CreateEditPage() {
         <Header isAdminPage/>
 
         <main className="flex flex-col relative p-1">
-            <h1 className="text-3xl text-center py-2">
+            <h1 className="text-3xl font-bold text-center py-2">
                 { id ? "Editar producto" : "Crear producto"}
             </h1>
             {
@@ -131,21 +146,31 @@ export default function CreateEditPage() {
                     <>
                     <section className="flex gap-3">
                         <div className="flex flex-col gap-10 w-1/2">
-                            <FormInput id={"product_name"}
-                                       type={"text"} 
-                                       name={"name"}
-                                       inputValue={product.name}
-                                       setInputValue={setProduct}
-                                       labelText={"Nombre del producto"}
-                                       required/>
 
-                            <FormInput id={"product_description"} 
-                                       type={"textarea"}
-                                       name={"description"}
-                                       inputValue={product.description}
-                                       setInputValue={setProduct}
-                                       labelText={"Descripción del producto"}
+                            <FloatingLabel inputID={"product_name"} 
+                                           labelText={"Nombre del producto"}>
+                                <input id="product_name"
+                                       type="text"
+                                       className="peer h-14 placeholder-shown:pt-2"
+                                       name="name"
+                                       value={product.name}
+                                       onChange={handleInputChange}
+                                       placeholder="Nombre del producto"
                                        required/>
+                            </FloatingLabel>
+
+                            <FloatingLabel inputID={"product_description"}
+                                           labelText={"Descripción del producto"}>
+                                <textarea id="product_description"
+                                          name="description"
+                                          className="peer h-36 resize-none placeholder-shown:pt-4"
+                                          value={product.description}
+                                          placeholder="Descripción del producto"
+                                          maxLength={200}
+                                          onChange={handleInputChange}
+                                          required>
+                                </textarea>
+                            </FloatingLabel>
                             
                             <div className="flex">
                                 <span className="flex justify-center items-center 
@@ -154,13 +179,18 @@ export default function CreateEditPage() {
                                                dark:border-blue-900">
                                     $
                                 </span>
-                                <FormInput id={"product_price"} 
-                                           type={"number"} 
-                                           name={"price"}
-                                           inputValue={product.price}
-                                           setInputValue={setProduct}
-                                           labelText={"Precio del producto"}
+                                <FloatingLabel inputID={"product_price"}
+                                               labelText={"Precio del producto"}>
+                                    <input id="product_price"
+                                           type="number"
+                                           className="peer h-14 placeholder-shown:pt-2 rounded-l-none"
+                                           name="price"
+                                           value={product.price}
+                                           onChange={handleInputChange}
+                                           placeholder="Precio del producto"
+                                           min={0}
                                            required/>
+                                </FloatingLabel>
                             </div>
                         </div>
                         <div className="flex flex-col gap-10 w-1/2">
