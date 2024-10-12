@@ -62,10 +62,11 @@ async function createProduct( formData ) {
                         },
                         withCredentials: true
                     });
-        return res.status;
+        return res;
     }
     catch (err) {
         console.error(err);
+        return err.response;
     }
 }
 
@@ -87,6 +88,7 @@ async function editProduct( id, formData ) {
     }
     catch (err) {
         console.error(err);
+        return err.response;
     }
 }
 
@@ -98,10 +100,11 @@ async function deleteProduct( productID, productImage ) {
             data: { productImage },
             withCredentials: true
         });
-        return res.status;
+        return res;
     }
     catch (err) {
         console.error(err);
+        return err.response;
     }
 }
 

@@ -54,7 +54,7 @@ const createProduct = async (req, res) => {
             return res.status(400).json({ message: "Error en la creación del producto" });
         }
 
-        res.status(201).json({ message: "Producto creado con éxito" });
+        res.status(201).json({ message: "Producto creado con éxito." });
     }
     catch (err) {
         if (req.file) {
@@ -94,7 +94,7 @@ const editProduct = async (req, res) => {
             await deleteProductImage(`/usr/src/app${req.body.productPrevImage}`);
         }
 
-        res.status(200).json({ message: "Producto modificado con éxito" });
+        res.status(200).json({ message: "Producto modificado con éxito." });
     }
     catch (err) {
         // Si se subió una imagen...
@@ -120,10 +120,10 @@ const deleteProduct = async (req, res) => {
                 await deleteProductImage(`/usr/src/app${productImage}`);
             }
 
-            return res.status(204).json({ message: "Producto eliminado con éxito "});
+            return res.status(204).json({ message: "Producto eliminado con éxito." });
         }
         else {
-            return res.status(400).json({ message: "No se pudo eliminar el producto especificado" });
+            return res.status(400).json({ message: "No se pudo eliminar el producto especificado." });
         }
     }
     catch (err) {

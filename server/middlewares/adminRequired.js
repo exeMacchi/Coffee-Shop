@@ -7,7 +7,7 @@ const adminRequired = (req, res, next) => {
 
     if (!token) {
         return res.status(401).json({ 
-            message:"Acceso denegado. No se ha proporcionado un token de acceso" 
+            message:"No se ha proporcionado un token de acceso." 
         });
     }
 
@@ -15,13 +15,21 @@ const adminRequired = (req, res, next) => {
         const decoded = jwt.verify(token, process.env.SECRET_KEY);
         if (!decoded.isAdmin) {
             return res.status(403).json({ 
-                message: "Acceso denegado. No se tiene los permisos de administrador" 
+                message: "No se tiene los permisos necesarios para realizar la operación." 
             });
         }
         next();
     }
     catch (err) {
-        res.status(401).json({ message: "Token de acceso inválido" });
+        if (err.name === "TokenExpiredError") {
+            return res.status(401).json({ message: "El token de acceso ha expirado." });
+        }
+        else if (err.name === "JsonWebTokenError") {
+            return res.status(401).json({ message: "Token de acceso inválido." });
+        }
+        else {
+            return res.status(500).json({ message: "Error en la autenticación." });
+        }
     }
 }
 

@@ -31,7 +31,8 @@ export default function Header({ isHomePage, isAdminPage }) {
             navigate(PublicRoutes.HomePage);
         }
         else {
-            // TODO: alerta de error de deslogueo.
+            setIsAdminLogged(false);
+            // TODO: navigate ErrorPage
         }
     }
 

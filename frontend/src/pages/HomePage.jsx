@@ -26,18 +26,25 @@ export default function HomePage() {
         <>
         <Header isHomePage/>
 
-        <main className={`${ loading ? "flex flex-col justify-center" 
-                                     : "columns-1 md:columns-2 lg:columns-4 "}`}>
+        <main className={`${ loading && "flex flex-col justify-center"}`}>
         {
             loading ? (
                 <Spinner pxSize={50}/>
             ) : (
                 products.length > 0 ? (
-                    products.map(product => (
-                        <ProductCard key={product.id} product={product}/>
-                    ))
+                    <section className="columns-1 md:columns-2 lg:columns-4">
+                    {
+                        products.map(product => (
+                            <ProductCard key={product.id} product={product}/>
+                        ))
+                    }
+                    </section>
                 ) : (
-                    <p>No hay productos</p>
+                    <section className="flex justify-center">
+                        <h1 className="text-5xl font-bold text-center my-4">
+                            No hay productos
+                        </h1>
+                    </section>
                 )
             )
         }

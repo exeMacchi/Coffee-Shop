@@ -1,21 +1,31 @@
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { useEffect, useRef, useState } from "react";
+
 import { getProduct, createProduct, editProduct } from "../services/productService";
+import handleAdminOperationResponse from "../utilities/handleAdminOperationResponse";
+import { PrivateRoutes } from "../utilities/routes";
 
 /* --- COMPONENTES --- */
 import Footer from "../components/Footer/Footer";
 import Header from "../components/Header/Header";
 import axios from "axios";
 import Spinner from "../components/Spinner/Spinner";
-import { PrivateRoutes } from "../utilities/routes";
 import FloatingLabel from "../components/Form/FloatingLabel";
+import Alert from "../components/Alert/Alert";
 
 export default function CreateEditPage() {
+    const { id } = useParams();
+    const navigate = useNavigate();
+
     const [initialLoading, setInitialLoading] = useState(true);
     const [processLoading, setProcessLoading] = useState(false);
 
-    const { id } = useParams();
-    const navigate = useNavigate();
+    const [alert, setAlert] = useState({
+        isVisible: false,
+        type: "",
+        title: "",
+        message: ""
+    });
 
     /* --- FORM STATE --- */
     const [product, setProduct] = useState({
@@ -84,38 +94,27 @@ export default function CreateEditPage() {
             e.preventDefault();
             setProcessLoading(true);
             const formData = new FormData(e.target);
-            console.log(formData.get("name"));
-            console.log(formData.get("description"));
-            console.log(formData.get("price"));
-            console.log(formData.get("productImage"));
             /* --- Se edita un producto --- */
             if (id) {
                 const res = await editProduct(id, formData);
-
-                if (res.status === 200) {
-                    console.log(res.data.message);
-                    navigate(PrivateRoutes.AdminPage);
-                }
-                else {
-                    console.error(res.data.message);
-                    // TODO: ALERTA DE ERROR AL MODIFICAR PRODUCTO
-                }
+                handleAdminOperationResponse(res, navigate, setAlert);
             }
             /* --- Se crea un producto --- */
             else {
-                const resStatus = await createProduct(formData);
-
-                if (resStatus === 201) {
-                    navigate(PrivateRoutes.AdminPage);
-                }
-                else {
-                    // TODO: ALERTA DE ERROR AL CREAR EL PRODUCTO
-                }
+                const res = await createProduct(formData);
+                console.log(res);
+                handleAdminOperationResponse(res, navigate, setAlert);
             }
             setProcessLoading(false);
         }
         catch (err) {
             console.error(err);
+            setAlert({
+                isVisible: true,
+                type: "error",
+                title: "Error",
+                message: err.message
+            });
         }
     }
 
@@ -128,13 +127,17 @@ export default function CreateEditPage() {
                 { id ? "Editar producto" : "Crear producto"}
             </h1>
             {
-                processLoading &&
-                ( 
+                processLoading && ( 
                     <div className="absolute top-0 size-full z-30 backdrop-blur-[1px] 
                                     flex justify-center items-center">
                         <Spinner pxSize={50}/> 
                     </div>
                 )
+            }
+            {
+                alert.isVisible && <Alert type={alert.type} 
+                                          title={alert.title} 
+                                          message={alert.message}/>
             }
             <form className="grow flex flex-col justify-center mb-2 gap-4" 
                   onSubmit={handleOnSubmit}

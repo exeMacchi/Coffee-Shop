@@ -13,11 +13,11 @@ async function register( formData ) {
                 },
             }
         );
-
         return res;
     }
     catch (err) {
         console.error(err);
+        return err.response;
     }
 }
 
@@ -40,6 +40,7 @@ async function login( formData ) {
     }
     catch (err) {
         console.error(err);
+        return err.response;
     }
 }
 
@@ -53,6 +54,7 @@ async function logout() {
     }
     catch (err) {
         console.error(err);
+        return err.response;
     }
 }
 

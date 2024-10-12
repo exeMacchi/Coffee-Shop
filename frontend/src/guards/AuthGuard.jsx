@@ -10,6 +10,9 @@ export default function AuthGuard() {
     ) : (
         <Navigate to={PublicRoutes.LoginPage} 
                   replace={true} 
-                  state={{ alert: "error", message: "No se tienen los permisos necesarios"}}/>
+                  state={{ alert: true, 
+                           type: "error",
+                           title: "Acceso denegado", 
+                           message: "No se tienen los permisos necesarios."}}/>
     ); 
 }

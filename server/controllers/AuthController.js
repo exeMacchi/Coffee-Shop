@@ -41,7 +41,7 @@ const login = async (req, res) => {
         const user = await UserModel.findOne({ where: { username: username }});
 
         if (!user) {
-            return res.status(404).json({ message: "User not found "});
+            return res.status(404).json({ message: "El usuario introducido es incorrecto."});
         }
 
         const result = await bcrypt.compare(password, user.password);
@@ -65,12 +65,12 @@ const login = async (req, res) => {
             });
 
             return res.status(200).json({ 
-                message: `Inicio de sesión correcta`,
+                message: "Inicio de sesión correcta",
                 isAdmin: user.admin,
             });
         }
         else {
-            return res.status(401).json({ message: "Inicio de sesión incorrecto" });
+            return res.status(401).json({ message: "Contraseña introducida incorrecta." });
         }
     }
     catch (err) {
