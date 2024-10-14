@@ -2,7 +2,8 @@
 export const PublicRoutes = {
     HomePage: "/",
     LoginPage: "/auth/login",
-    RegisterPage: "/auth/register"
+    RegisterPage: "/auth/register",
+    ErrorPage: "/error"
 }
 
 export const PrivateRoutes = {

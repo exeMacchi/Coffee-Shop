@@ -1,5 +1,5 @@
 
-export default function Alert({type, title, message}) {
+export default function Alert({ type, title, message }) {
     return (
         <div className={`border-4 rounded-2xl p-4 my-2 shadow-inner 
                         ${ type === "success"

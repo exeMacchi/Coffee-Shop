@@ -8,7 +8,10 @@ const getAllProducts = async (req, res) => {
         res.status(200).json(products);
     }
     catch (err) {
-        res.status(500).json({ message: err.message });
+        res.status(500).json({ 
+            titleError: "Server Error", 
+            message: err.message 
+        });
     }
 };
 
@@ -23,7 +26,10 @@ const getProduct = async (req, res) => {
         res.status(200).json(product);
     }
     catch (err) {
-        res.status(500).json({ message: "Server error" });
+        res.status(500).json({ 
+            titleError: "Server error",
+            message: err.message
+         });
     }
 }
 
@@ -61,7 +67,10 @@ const createProduct = async (req, res) => {
             // Se elimina automáticamente la imagen subida ante un error.
             await deleteProductImage(`/usr/src/app/productImages/${req.file.filename}`);
         }
-        res.status(500).json({ message: err.message });
+        res.status(500).json({ 
+            titleError: "Server Error",
+            message: err.message
+        });
     }
 }
 
@@ -102,7 +111,10 @@ const editProduct = async (req, res) => {
             // y hubo un error, se borra automáticamente la imagen subida.
             await deleteProductImage(`/usr/src/app/productImages/${req.file.filename}`);
         }
-        res.status(500).json({ message: err.message });
+        res.status(500).json({ 
+            titleError: "Server Error",
+            message: err.message 
+        });
     }
 }
 
@@ -128,7 +140,10 @@ const deleteProduct = async (req, res) => {
     }
     catch (err) {
         console.log(err);
-        res.status(500).json({ message: err.message });
+        res.status(500).json({ 
+            titleError: "Server Error",
+            message: err.message 
+        });
     }
 }
 

@@ -26,7 +26,7 @@ export default function HomePage() {
         <>
         <Header isHomePage/>
 
-        <main className={`${ loading && "flex flex-col justify-center"}`}>
+        <main className={`flex flex-col ${ loading ? "justify-center" : "" }`}>
         {
             loading ? (
                 <Spinner pxSize={50}/>
@@ -40,8 +40,8 @@ export default function HomePage() {
                     }
                     </section>
                 ) : (
-                    <section className="flex justify-center">
-                        <h1 className="text-5xl font-bold text-center my-4">
+                    <section className="grow flex justify-center items-center">
+                        <h1 className="text-7xl font-bold text-center my-4">
                             No hay productos
                         </h1>
                     </section>

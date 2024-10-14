@@ -1,3 +1,4 @@
+import { replace } from "react-router-dom";
 import { PrivateRoutes, PublicRoutes } from "./routes";
 
 export default function handleAuthOperationResponse(res, navigate, setIsAdminLogged, setAlert) {
@@ -12,11 +13,13 @@ export default function handleAuthOperationResponse(res, navigate, setIsAdminLog
     }
 
     switch (res.status) {
+        // Se loguea correctamente
         case 200:
             setIsAdminLogged(res.data.isAdmin);
             navigate(PrivateRoutes.AdminPage, { replace: true });
             break;
 
+        // Se registra correctamente
         case 201:
             navigate(PublicRoutes.LoginPage, {
                 replace: true,
@@ -29,6 +32,7 @@ export default function handleAuthOperationResponse(res, navigate, setIsAdminLog
             });
             break;
 
+        // Error en la operación
         case 400:
             setAlert({
                 isVisible: true,
@@ -38,6 +42,7 @@ export default function handleAuthOperationResponse(res, navigate, setIsAdminLog
             });
             break;
 
+        // Error de logueo (contraseña incorrecta)
         case 401:
             setAlert({
                 isVisible: true,
@@ -47,6 +52,7 @@ export default function handleAuthOperationResponse(res, navigate, setIsAdminLog
             });
             break;
 
+        // Error de logueo (usuario incorrecto)
         case 404:
             setAlert({
                 isVisible: true,
@@ -56,8 +62,17 @@ export default function handleAuthOperationResponse(res, navigate, setIsAdminLog
             });
             break;
         
+        // Error de servidor
         default:
-            // TODO: Error Page
+            navigate(PublicRoutes.ErrorPage, {
+                replace: true,
+                state: {
+                    alert: true,
+                    type: "error",
+                    title: res.data.titleError,
+                    message: res.data.message
+                }
+            });
             break;
     }
 }

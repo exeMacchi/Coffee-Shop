@@ -15,6 +15,7 @@ import AdminPage from './pages/AdminPage';
 import CreateEditPage from './pages/CreateEditPage';
 import AuthPage from './pages/AuthPage';
 import NotFoundPage from './pages/NotFountPage';
+import ErrorPage from './pages/ErrorPage';
 
 
 function App() {
@@ -51,6 +52,8 @@ function App() {
                         <Route path={`${PrivateRoutes.EditPage}/:id`}
                                element={<CreateEditPage/>}/>
                     </Route>
+
+                    <Route path={PublicRoutes.ErrorPage} element={<ErrorPage/>}/>
 
                     <Route path="*" element={<NotFoundPage/>}/>
                 </Routes>

@@ -30,7 +30,10 @@ const register = async (req, res) => {
         res.status(201).json({ message: "Usuario creado con éxito" });
     }
     catch (err) {
-        res.status(500).json({ message: "Server Error", error: err });
+        res.status(500).json({ 
+            titleError: "Server Error", 
+            message: err.message 
+        });
     }
 }
 
@@ -74,7 +77,10 @@ const login = async (req, res) => {
         }
     }
     catch (err) {
-        res.status(500).json({ message: "Server error" });
+        res.status(500).json({ 
+            titleError: "Server error",
+            message: err.message
+        });
     }
 }
 
@@ -86,8 +92,8 @@ const logout = async (req, res) => {
     }
     catch (err) {
         res.status(500).json({ 
-            message: "Error en el cierre de sesión",
-            error: err.message
+            titleError: "Error en el cierre de sesión",
+            message: err.message
         });
     }
 }
