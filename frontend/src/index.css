@@ -12,9 +12,9 @@
     }
 
     .nav__link {
-        @apply rounded-full p-3 hover:cursor-pointer transition
-            bg-yellow-800 hover:bg-yellow-700
-            dark:bg-blue-900 dark:hover:bg-blue-700
+        @apply rounded-full p-3 hover:cursor-pointer transition text-center
+             bg-yellow-800 hover:bg-yellow-700
+             dark:bg-blue-900 dark:hover:bg-blue-700
     }
 
     .btn-primary {

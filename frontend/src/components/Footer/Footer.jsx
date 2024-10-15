@@ -1,20 +1,22 @@
-import { Link } from "react-router-dom";
-import { PrivateRoutes, PublicRoutes } from "../../utilities/routes";
+// Build-in
+import { NavLink } from "react-router-dom";
 
-export default function Footer({isHomePage, isAdminPage}) {
+// Utilites
+import { PublicRoutes } from "../../utilities/routes";
+
+// Components
+import Navbar from "../Navbar/Navbar";
+
+
+export default function Footer() {
     return (
         <footer className="bg-yellow-900 dark:bg-slate-900 px-3 py-8 relative z-30">
-            <nav className="flex justify-between items-center text-white">
-                <ul className="flex gap-4">
-                    <li className={`nav__link ${ isHomePage ? 'bg-orange-950 dark:bg-blue-950' : ''}`}>
-                        <Link to={PublicRoutes.HomePage}>HOME</Link>
-                    </li>
-                    <li className={`nav__link ${ isAdminPage ? 'bg-orange-950 dark:bg-blue-950' : ''}`}>
-                        <Link to={PrivateRoutes.AdminPage}>ADMIN</Link>
-                    </li>
-                </ul>
+            <nav className="flex flex-col md:flex-row justify-between items-center text-white">
+                <div className="flex flex-col md:flex-row w-full md:w-0 gap-4 mb-2">
+                    <Navbar/>
+                </div>
 
-                <Link to={PublicRoutes.HomePage}>LOGO</Link>
+                <NavLink to={PublicRoutes.HomePage}>LOGO</NavLink>
             </nav>
             <p className="text-center text-white">
                 Copyright {new Date().getFullYear()}

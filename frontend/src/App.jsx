@@ -53,7 +53,8 @@ function App() {
                                element={<CreateEditPage/>}/>
                     </Route>
 
-                    <Route path={PublicRoutes.ErrorPage} element={<ErrorPage/>}/>
+                    <Route path={PublicRoutes.ErrorPage} 
+                           element={<ErrorPage/>}/>
 
                     <Route path="*" element={<NotFoundPage/>}/>
                 </Routes>

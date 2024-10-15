@@ -73,7 +73,7 @@ export default function AdminPage() {
 
     return (
         <>
-        <Header isAdminPage/>
+        <Header/>
 
         <main className="">
         { 
@@ -167,7 +167,7 @@ export default function AdminPage() {
         }
         </main>
 
-        <Footer isAdminPage/>
+        <Footer/>
         </>
     );
 }

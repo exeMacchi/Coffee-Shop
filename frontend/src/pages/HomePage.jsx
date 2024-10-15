@@ -24,7 +24,7 @@ export default function HomePage() {
 
     return (
         <>
-        <Header isHomePage/>
+        <Header/>
 
         <main className={`flex flex-col ${ loading ? "justify-center" : "" }`}>
         {
@@ -41,7 +41,7 @@ export default function HomePage() {
                     </section>
                 ) : (
                     <section className="grow flex justify-center items-center">
-                        <h1 className="text-7xl font-bold text-center my-4">
+                        <h1 className="text-4xl md:text-7xl font-bold text-center my-4">
                             No hay productos
                         </h1>
                     </section>
@@ -50,7 +50,7 @@ export default function HomePage() {
         }
         </main>
 
-        <Footer isHomePage/>
+        <Footer/>
         </>
     );
 }

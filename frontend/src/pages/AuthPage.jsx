@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import { useAuthContext } from "../providers/AuthProvider.jsx";
 
-import { PrivateRoutes, PublicRoutes } from "../utilities/routes.js";
+import { useAuthContext } from "../providers/AuthProvider.jsx";
+import { PublicRoutes } from "../utilities/routes.js";
 import { register, login } from "../services/authService.js";
 import handleAuthOperationResponse from "../utilities/handleAuthOperationResponse.js";
 
@@ -85,7 +85,7 @@ export default function AuthPage({ isRegisterForm }) {
             {
                 alert.isVisible && (
                     <div className="flex justify-center">
-                        <div className="w-1/2">
+                        <div className="w-full md:w-1/2 mx-2">
                             <Alert type={alert.type} 
                                    title={alert.title} 
                                    message={alert.message}/>
@@ -97,7 +97,7 @@ export default function AuthPage({ isRegisterForm }) {
                 { isRegisterForm ? "Registrarse" : "Iniciar Sesión" }
             </h1>
             <div className="grow flex flex-col justify-center">
-                <form className="flex flex-col justify-center gap-20 w-1/2 mx-auto"
+                <form className="flex flex-col justify-center gap-10 w-full md:w-1/2 mx-2 md:mx-auto"
                       onSubmit={handleOnSubmit}>
 
                     <FloatingLabel inputID={"username"} labelText={"Usuario"}>
