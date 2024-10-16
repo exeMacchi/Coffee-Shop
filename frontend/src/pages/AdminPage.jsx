@@ -7,8 +7,7 @@ import { PrivateRoutes } from "../utilities/routes";
 import handleAdminOperationResponse from "../utilities/handleAdminOperationResponse";
 
 import Header from "../components/Header/Header";
-import EditIcon from "../components/Icons/EditIcon";
-import TrashIcon from "../components/Icons/TrashIcon";
+import { EditIcon, TrashIcon} from "../components/Icons/Icons";
 import Footer from "../components/Footer/Footer";
 import Modal from "../components/Modal/Modal";
 import Spinner from "../components/Spinner/Spinner";

@@ -9,10 +9,7 @@ import verifyDarkMode from "../../utilities/verifyDarkMode";
 import { PublicRoutes } from "../../utilities/routes";
 
 // Icons
-import LightIcon from "../Icons/LightIcon";
-import DarkIcon from "../Icons/DarkIcon";
-import BarIcon from "../Icons/BarIcon";
-import CloseIcon from "../Icons/CloseIcon";
+import { LightIcon, DarkIcon, BarIcon, CloseIcon } from "../Icons/Icons";
 
 // Componentes
 import Navbar from "../Navbar/Navbar";

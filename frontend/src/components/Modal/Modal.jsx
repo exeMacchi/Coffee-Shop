@@ -1,4 +1,4 @@
-import CloseIcon from "../Icons/CloseIcon"
+import { CloseIcon } from "../Icons/Icons";
 
 export default function Modal({ open, onClose, children }) {
     return (

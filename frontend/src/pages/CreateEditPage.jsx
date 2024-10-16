@@ -1,5 +1,6 @@
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { useEffect, useRef, useState } from "react";
+import axios from "axios";
 
 import { getProduct, createProduct, editProduct } from "../services/productService";
 import handleAdminOperationResponse from "../utilities/handleAdminOperationResponse";
@@ -8,7 +9,6 @@ import { PrivateRoutes } from "../utilities/routes";
 /* --- COMPONENTES --- */
 import Footer from "../components/Footer/Footer";
 import Header from "../components/Header/Header";
-import axios from "axios";
 import Spinner from "../components/Spinner/Spinner";
 import FloatingLabel from "../components/Form/FloatingLabel";
 import Alert from "../components/Alert/Alert";
