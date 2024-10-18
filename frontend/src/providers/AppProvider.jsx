@@ -1,9 +1,12 @@
 import { AuthProvider } from "./AuthProvider";
+import { CartProvider } from "./CartProvider";
 
 export default function AppProvider({children}) {
     return (
         <AuthProvider>
-            {children}
+            <CartProvider>
+                {children}
+            </CartProvider>
         </AuthProvider>
     )
 }

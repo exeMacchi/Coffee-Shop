@@ -9,7 +9,7 @@ import verifyDarkMode from "../../utilities/verifyDarkMode";
 import { PublicRoutes } from "../../utilities/routes";
 
 // Icons
-import { LightIcon, DarkIcon, BarIcon, CloseIcon } from "../Icons/Icons";
+import { LightIcon, DarkIcon, BarIcon, CloseIcon, CartIcon } from "../Icons/Icons";
 
 // Componentes
 import Navbar from "../Navbar/Navbar";
@@ -90,6 +90,18 @@ export default function Header() {
                                     <LightIcon className="size-10"/>
                                 )
                             }
+                        </button>
+
+                        <button type="button"
+                                className="bg-orange-950 hover:bg-orange-900 
+                                           dark:bg-blue-900 dark:hover:bg-blue-700
+                                             rounded-full p-1 relative flex justify-center items-center">
+                            <CartIcon className="size-10"/>
+                            <span className="absolute z-50 text-black text-lg 
+                                             inset-0 -top-[6px] left-[2px] 
+                                             flex items-center justify-center">
+                                0
+                            </span>
                         </button>
 
                         <button type="button" onClick={() => setIsMenuOpen(!isMenuOpen)}>

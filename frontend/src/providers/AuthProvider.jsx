@@ -9,8 +9,6 @@ export function useAuthContext() {
 export function AuthProvider({ children }) {
     const [isAdminLogged, setIsAdminLogged] = useState(false);
 
-    // TODO: verificar si hay una cookie vigente en el servidor.
-
     return (
     <AuthContext.Provider value={{isAdminLogged, setIsAdminLogged}}>
         {children}

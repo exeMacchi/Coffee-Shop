@@ -72,3 +72,52 @@ export function BarIcon(props) {
         </svg>
     );
 }
+
+export function CartIcon(props) {
+	return (
+        <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" 
+             viewBox="0 0 24 24" {...props}>
+            <g fill="none">
+                <path fill="currentColor" d="M18 15H7L5.5 6H21z"></path>
+                <path stroke="currentColor" strokeLinecap="round" 
+                    strokeLinejoin="round" strokeWidth={2} 
+                    d="M3 3h2l.5 3m0 0L7 15h11l3-9z"></path>
+                <circle cx={8} cy={20} r={1} stroke="currentColor" 
+                        strokeLinecap="round" strokeLinejoin="round" 
+                        strokeWidth={2}></circle>
+                <circle cx={17} cy={20} r={1} stroke="currentColor" 
+                        strokeLinecap="round" strokeLinejoin="round" 
+                        strokeWidth={2}></circle>
+            </g>
+        </svg>
+    );
+}
+
+
+export function PlusIcon(props) {
+	return (
+        <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" 
+             viewBox="0 0 24 24" {...props}>
+            <path fill="currentColor" d="M19 12.998h-6v6h-2v-6H5v-2h6v-6h2v6h6z"></path>
+        </svg>
+    );
+}
+
+export function MinusIcon(props) {
+	return (
+        <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" 
+             viewBox="0 0 24 24" {...props}>
+            <path fill="currentColor" d="M19 12.998H5v-2h14z"></path>
+        </svg>);
+}
+
+export function SearchIcon(props) {
+	return (
+        <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" 
+             viewBox="0 0 24 24" {...props}>
+            <path fill="currentColor" 
+                  d="m19.6 21l-6.3-6.3q-.75.6-1.725.95T9.5 16q-2.725 0-4.612-1.888T3 9.5t1.888-4.612T9.5 3t4.613 1.888T16 9.5q0 1.1-.35 2.075T14.7 13.3l6.3 6.3zM9.5 14q1.875 0 3.188-1.312T14 9.5t-1.312-3.187T9.5 5T6.313 6.313T5 9.5t1.313 3.188T9.5 14">
+            </path>
+        </svg>
+    );
+} 
