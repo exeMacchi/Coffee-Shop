@@ -16,6 +16,7 @@ import CreateEditPage from './pages/CreateEditPage';
 import AuthPage from './pages/AuthPage';
 import NotFoundPage from './pages/NotFountPage';
 import ErrorPage from './pages/ErrorPage';
+import CartPage from './pages/CartPage';
 
 
 function App() {
@@ -41,6 +42,9 @@ function App() {
 
                     <Route path={PublicRoutes.RegisterPage} 
                            element={<AuthPage isRegisterForm/>}/>
+
+                    <Route path={PublicRoutes.CartPage} 
+                           element={<CartPage/>}/>
 
                     <Route element={<AuthGuard/>}>
                         <Route path={PrivateRoutes.AdminPage}

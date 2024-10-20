@@ -1,6 +1,6 @@
 // Build-in
 import { useState, useEffect } from "react";
-import { useNavigate, NavLink  } from "react-router-dom";
+import { useNavigate, NavLink, Link  } from "react-router-dom";
 
 // Utilites
 import { useAuthContext } from "../../providers/AuthProvider";
@@ -13,10 +13,12 @@ import { LightIcon, DarkIcon, BarIcon, CloseIcon, CartIcon } from "../Icons/Icon
 
 // Componentes
 import Navbar from "../Navbar/Navbar";
+import { useCartContext } from "../../providers/CartProvider";
 
 
 export default function Header() {
     const { isAdminLogged, setIsAdminLogged } = useAuthContext();
+    const { cart } = useCartContext();
     const navigate = useNavigate();
 
     /* --- Modo oscuro --- */
@@ -92,17 +94,18 @@ export default function Header() {
                             }
                         </button>
 
-                        <button type="button"
-                                className="bg-orange-950 hover:bg-orange-900 
-                                           dark:bg-blue-900 dark:hover:bg-blue-700
-                                             rounded-full p-1 relative flex justify-center items-center">
+                        <Link to={PublicRoutes.CartPage}
+                              className="bg-orange-950 hover:bg-orange-900 
+                                         dark:bg-blue-900 dark:hover:bg-blue-700
+                                           rounded-full p-1 relative 
+                                           flex justify-center items-center">
                             <CartIcon className="size-10"/>
                             <span className="absolute z-50 text-black text-lg 
                                              inset-0 -top-[6px] left-[2px] 
                                              flex items-center justify-center">
-                                0
+                            { cart?.length }
                             </span>
-                        </button>
+                        </Link>
 
                         <button type="button" onClick={() => setIsMenuOpen(!isMenuOpen)}>
                         {

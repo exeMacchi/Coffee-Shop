@@ -87,9 +87,9 @@ export default function HomePage() {
             ) : (
                 products.length > 0 ? (
                     <>
-                    <section className="flex bg-yellow-900 dark:bg-slate-900 
+                    <section className="flex flex-col md:flex-row gap-4 bg-yellow-900 dark:bg-slate-900 
                                       text-orange-100 dark:text-stone-200
-                                        px-2 py-4 mx-2 md:mx-0 mb-2 rounded-2xl">
+                                        p-4 md:px-2 md:py-4 mx-2 md:mx-0 mb-2 rounded-2xl">
                         {/* BUSCADOR */}
                         <div className="flex gap-2 w-full md:w-2/3">
                             <input type="text"
@@ -102,8 +102,8 @@ export default function HomePage() {
 
                             <button type="button" 
                                     className="bg-orange-950 hover:bg-orange-900 transition 
-                                            dark:bg-blue-900 dark:hover:bg-blue-700 
-                                                rounded-full p-1"
+                                               dark:bg-blue-900 dark:hover:bg-blue-700 
+                                                 rounded-full p-1"
                                     onClick={handleSearch}>
                                 <SearchIcon className="size-10"/>
                             </button>
@@ -115,7 +115,7 @@ export default function HomePage() {
                                 Nombre
                             </span>
                             <input type="checkbox" 
-                                   className="grow-0 relative inline-block appearance-none 
+                                   className="grow-0 relative inline-block appearance-none cursor-pointer
                                               focus:ring-0 focus:outline-none dark:focus:outline-none
                                               h-10 w-20 rounded-full transition-colors duration-500
                                               bg-orange-200 dark:bg-slate-300 
@@ -135,7 +135,8 @@ export default function HomePage() {
 
                     {
                         filteredProducts.length > 0 ? (
-                            <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-2 px-2 md:px-0">
+                            <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 
+                                                gap-2 px-2 md:px-0">
                             {
                                 filteredProducts.map(product => (
                                     <ProductCard key={product.id} product={product}/>

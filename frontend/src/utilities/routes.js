@@ -3,7 +3,8 @@ export const PublicRoutes = {
     HomePage: "/",
     LoginPage: "/auth/login",
     RegisterPage: "/auth/register",
-    ErrorPage: "/error"
+    ErrorPage: "/error",
+    CartPage: "/shop/cart"
 }
 
 export const PrivateRoutes = {

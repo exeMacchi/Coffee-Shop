@@ -132,7 +132,7 @@ export default function AdminPage() {
                             </tbody>
                         </table>
                         <Modal open={showDeleteModal} 
-                            onClose={() => setShowDeleteModal(false)}>
+                               onClose={() => setShowDeleteModal(false)}>
                                 <div className="flex flex-col justify-between h-full gap-5">
                                     <h4 className="text-3xl font-bold text-center">
                                         ¿Estás seguro de eliminar el producto?

@@ -1,5 +1,5 @@
 import { Link, useNavigate, useParams } from "react-router-dom";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useId, useRef, useState } from "react";
 import axios from "axios";
 
 import { getProduct, createProduct, editProduct } from "../services/productService";
@@ -34,6 +34,9 @@ export default function CreateEditPage() {
         price: 0,
         image: "/productImages/productPlaceholder.jpg"
     });
+    const productNameID = useId();
+    const productDescriptionID = useId();
+    const productPriceID = useId();
     const productImgForm = useRef();
     const [btnDisabled, setBtnDisabled] = useState(true);
 
@@ -150,9 +153,9 @@ export default function CreateEditPage() {
                     <section className="flex gap-3">
                         <div className="flex flex-col gap-10 w-1/2">
 
-                            <FloatingLabel inputID={"product_name"} 
+                            <FloatingLabel inputID={productNameID} 
                                            labelText={"Nombre del producto"}>
-                                <input id="product_name"
+                                <input id={productNameID}
                                        type="text"
                                        className="peer h-14 placeholder-shown:pt-2"
                                        name="name"
@@ -162,9 +165,9 @@ export default function CreateEditPage() {
                                        required/>
                             </FloatingLabel>
 
-                            <FloatingLabel inputID={"product_description"}
+                            <FloatingLabel inputID={productDescriptionID}
                                            labelText={"Descripción del producto"}>
-                                <textarea id="product_description"
+                                <textarea id={productDescriptionID}
                                           name="description"
                                           className="peer h-36 resize-none placeholder-shown:pt-4"
                                           value={product.description}
@@ -177,14 +180,15 @@ export default function CreateEditPage() {
                             
                             <div className="flex">
                                 <span className="flex justify-center items-center 
-                                               bg-orange-950 dark:bg-blue-950 h-full w-20 rounded-l-3xl 
-                                                 border-4 border-yellow-700 font-bold text-white
-                                               dark:border-blue-900">
+                                               bg-orange-950 dark:bg-blue-950 
+                                                 h-full w-20 rounded-l-3xl 
+                                                 border-4 border-yellow-700 font-bold 
+                                                 text-white dark:border-blue-900">
                                     $
                                 </span>
-                                <FloatingLabel inputID={"product_price"}
+                                <FloatingLabel inputID={productPriceID}
                                                labelText={"Precio del producto"}>
-                                    <input id="product_price"
+                                    <input id={productPriceID}
                                            type="number"
                                            className="peer h-14 placeholder-shown:pt-2 rounded-l-none"
                                            name="price"
@@ -221,14 +225,11 @@ export default function CreateEditPage() {
                                 // Cuando se edita un producto, se guarda una referencia
                                 // de la imagen actual para que, en caso de que se modifique
                                 // la imagen, en el servidor se borre la imagen antigua.
-                                id && 
-                                (
-                                    <input type="text"
-                                           name="productPrevImage"
-                                           className="hidden"
-                                           value={product.image} 
-                                           readOnly/>
-                                ) 
+                                id && <input type="text"
+                                             name="productPrevImage"
+                                             className="hidden"
+                                             value={product.image} 
+                                             readOnly/>
                             }
                         </div>
                     </section>

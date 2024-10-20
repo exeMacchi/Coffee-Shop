@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useId, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 
 import { useAuthContext } from "../providers/AuthProvider.jsx";
@@ -25,6 +25,8 @@ export default function AuthPage({ isRegisterForm }) {
     });
 
     /* --- FORM --- */
+    const usernameID = useId();
+    const passwordID = useId();
     const [auth, setAuth] = useState({
         username: "",
         password: ""
@@ -44,6 +46,7 @@ export default function AuthPage({ isRegisterForm }) {
         }
     }, []);
 
+    /* Verificar si activar el botón de logueo/regitro */
     useEffect(() => {
         const isFormValid = auth.username.length > 0 &&
                             auth.password.length > 0;
@@ -81,6 +84,7 @@ export default function AuthPage({ isRegisterForm }) {
     return (
         <>
         <Header/>
+
         <main className="flex flex-col">
             {
                 alert.isVisible && (
@@ -97,11 +101,12 @@ export default function AuthPage({ isRegisterForm }) {
                 { isRegisterForm ? "Registrarse" : "Iniciar Sesión" }
             </h1>
             <div className="grow flex flex-col justify-center">
-                <form className="flex flex-col justify-center gap-10 w-full md:w-1/2 mx-2 md:mx-auto"
+                <form className="flex flex-col justify-center gap-10 
+                                 w-full md:w-1/2 mx-2 md:mx-auto"
                       onSubmit={handleOnSubmit}>
 
-                    <FloatingLabel inputID={"username"} labelText={"Usuario"}>
-                        <input id="username" 
+                    <FloatingLabel inputID={usernameID} labelText={"Usuario"}>
+                        <input id={usernameID}
                                type="text" 
                                className="peer h-14 placeholder-shown:pt-2"
                                name="username"
@@ -111,8 +116,8 @@ export default function AuthPage({ isRegisterForm }) {
                                required/>
                     </FloatingLabel>
 
-                    <FloatingLabel inputID={"password"} labelText={"Contraseña"}>
-                        <input id="password"
+                    <FloatingLabel inputID={passwordID} labelText={"Contraseña"}>
+                        <input id={passwordID}
                                type="password" 
                                name="password"
                                value={auth.password}
@@ -142,6 +147,7 @@ export default function AuthPage({ isRegisterForm }) {
                 </form>
             </div>
         </main>
+
         <Footer/>
         </>
     );

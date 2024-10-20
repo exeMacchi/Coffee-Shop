@@ -3,7 +3,14 @@ import { createContext, useContext, useState } from "react";
 const AuthContext = createContext();
 
 export function useAuthContext() {
-    return useContext(AuthContext);
+    const context = useContext(AuthContext);
+
+    if (!context) {
+        throw new Error("El hook se está utilizando dentro de un componente " +
+                        "que no tiene acceso al Provider.");
+    }
+
+    return context
 }
 
 export function AuthProvider({ children }) {
