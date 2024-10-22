@@ -15,7 +15,7 @@ export default function CartPage() {
             cart?.length > 0 ? (
                 <>
                 {/* Detallar el pedido */}
-                <section>
+                <section className="mt-2">
                     <h1 className="text-center text-3xl rounded-t-3xl
                                  text-orange-50 dark:text-slate-50
                                  bg-yellow-900 dark:bg-blue-950">
@@ -27,7 +27,7 @@ export default function CartPage() {
                             <tr className="grid grid-cols-5 place-items-center h-10 py-2">
                                 <th>IMAGEN</th>
                                 <th>NOMBRE</th>
-                                <th>PRECIO</th>
+                                <th>PRECIO POR UNIDAD</th>
                                 <th>CANTIDAD</th>
                                 <th>REMOVER</th>
                             </tr>
@@ -49,7 +49,7 @@ export default function CartPage() {
                                     <td>{cartProduct.name}</td>
 
                                     {/* PRECIO */}
-                                    <td>$ {cartProduct.price * cartProduct.quantity}</td>
+                                    <td>$ {cartProduct.price}</td>
 
                                     {/* CANTIDAD */}
                                     <td className="flex justify-between items-center">
@@ -101,16 +101,28 @@ export default function CartPage() {
                 </section>
 
                 {/* Sección de confirmar pedido */}
-                <section className="w-1/2 ml-auto">
-                    <h3 className="text-center text-3xl rounded-t-3xl py-3
+                <section className="w-1/2 ml-auto mt-4">
+                    <h3 className="text-end text-3xl rounded-t-3xl py-3 px-2
                                  text-orange-50 dark:text-slate-50
                                  bg-yellow-900 dark:bg-blue-950">
                         RESUMEN DE PAGO
                     </h3>
-                    <div className="bg-orange-200 dark:bg-slate-700 py-5 px-2">
-                        <p className="text-2xl text-end">
-                            TOTAL A PAGAR: ${cart.reduce((total, cartProduct) => total + (cartProduct.price * cartProduct.quantity), 0)}
-                        </p>
+                    <div className="flex flex-col bg-orange-200 dark:bg-slate-700 py-5 px-2">
+                    {
+                        cart.map(cartProduct => (
+                            <div className="flex justify-end gap-5 text-2xl">
+                                <span className="">{cartProduct.name}</span>
+                                <span>$ {cartProduct.price * cartProduct.quantity}</span>
+                            </div>
+                        ))
+                    }
+                        <div className="flex justify-end gap-5 text-2xl mt-2 border-t-2
+                                      border-t-yellow-900 dark:border-t-blue-950">
+                            <span>TOTAL A PAGAR:</span>
+                            <span className="font-bold">
+                                $ {cart.reduce((total, cartProduct) => total + (cartProduct.price * cartProduct.quantity), 0)}
+                            </span>
+                        </div>
                     </div>
                     <button className="w-full rounded-b-3xl text-xl text-center py-3
                                      text-orange-50 dark:text-slate-50 
@@ -121,8 +133,10 @@ export default function CartPage() {
                 </section>
                 </>
             ) : (
-                <section>
-                    <h2>CARRITO DE COMPRAS</h2>
+                <section className="grow flex justify-center items-center">
+                    <h2 className="text-4xl font-bold">
+                        NO HAY PRODUCTOS EN EL CARRITO
+                    </h2>
                 </section>
             )
         }
